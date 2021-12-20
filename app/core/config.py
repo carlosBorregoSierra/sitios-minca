@@ -3,20 +3,20 @@ from typing import Optional
 from functools import lru_cache
 
 class Settings(BaseSettings):
-    API_V1_STR: str ="/api/v1"
-    PROJECT_NAME: str="Sitios en minca"
+   API_V1_STR: str = "/api/v1"
+   PROJECT_NAME: str = "Sitios en minca"
+ 
+   POSTGRES_SERVER: str = "localhost"
+   POSTGRES_USER: str = "fastapi"
+   POSTGRES_PASSWORD: str = "123123"
+   POSTGRES_DB: str = "minca"
+   SQLALCHEMY_DATABASE_URI: Optional[str] = f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_SERVER}/{POSTGRES_DB}" #cadena de conexion
 
-    POSTGRES_SERVER: srt="localhost"
-    POSTGRES_USER: srt="fastapi"
-    POSTGRES_PASSWORD: srt="123123"
-    POSTGRES_BD: srt="minca"
-    SQLALCHEMY_DATABASE_URI: Optional[str] = f"postgresql://{POSTGRES_USER}:{POSTGRES:POSTGRES_PASSWORD}@{POSTGRES_SERVER}/{POSTGRES_BD}" #cadena de conexion
+   class Config:
+       case_sensitive = True
 
-    class Config:
-        case_sensitive = True
+@lru_cache
+def get_settigns():
+    return Settings()
 
-    @lru_cache
-    def get_settings():
-        return Settings()
-
-    settings = get_settings() 
+settings = get_settigns()
